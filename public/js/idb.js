@@ -1,6 +1,3 @@
-const { response } = require("express");
-const { get } = require("mongoose");
-
 // db connection
 let db;
 
