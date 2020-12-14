@@ -8,7 +8,7 @@ const request = indexedDB.open('budget_tracker', 1);
 request.onupgradeneeded = function (event) {
     const db = event.target.result;
 
-    db.createObjectStore('new_record', { autoIncrement: true });
+    db.createObjectStore('new_transaction', { autoIncrement: true });
 };
 
 // successful request
@@ -25,8 +25,8 @@ request.onerror = function (event) {
 
 // save the record
 function saveRecord(record) {
-    const transaction = db.transaction(['new_record'], 'readwrite');
-    const recordObjectStore = transaction.objectStore('new_record');
+    const transaction = db.transaction(['new_transaction'], 'readwrite');
+    const recordObjectStore = transaction.objectStore('new_transaction');
 
     recordObjectStore.add(record);
 
@@ -35,8 +35,8 @@ function saveRecord(record) {
 
 // upload the record
 function uploadRecord() {
-    const transaction = db.transaction(['new_record'], 'readwrite');
-    const recordObjectStore = transaction.objectStore('new_record');
+    const transaction = db.transaction(['new_transaction'], 'readwrite');
+    const recordObjectStore = transaction.objectStore('new_transaction');
 
     const getAll = recordObjectStore.getAll();
 
@@ -55,8 +55,8 @@ function uploadRecord() {
             .then(serverResponse => {
                 if (serverResponse.message) throw new Error(serverResponse);
 
-                const transaction = db.transaction(['new_record'], 'readwrite');
-                const recordObjectStore = transaction.objectStore('new_record');
+                const transaction = db.transaction(['new_transaction'], 'readwrite');
+                const recordObjectStore = transaction.objectStore('new_transaction');
                 recordObjectStore.clear();
 
                 alert("Transactions have been saved and progress made.");
@@ -77,8 +77,8 @@ function uploadRecord() {
                 .then(serverResponse => {
                     if(serverResponse.message) throw new Error(serverResponse);
 
-                    const transaction = db.transaction(['new_record'], 'readwrite');
-                    const recordObjectStore = transaction.objectStore('new_record');
+                    const transaction = db.transaction(['new_transaction'], 'readwrite');
+                    const recordObjectStore = transaction.objectStore('new_transaction');
                     recordObjectStore.clear();
 
                     alert("Transactions have been saved and progress made.");
